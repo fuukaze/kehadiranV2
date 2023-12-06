@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>{{title}}</title>
+   {% block css %}
+   {% include "sidepage/css.html" %}
+   {% endblock css %}
+</head>
+
+
+{% block isi %}
+
+<body class="hold-transition sidebar-collapse layout-top-nav">
+   <div class="wrapper">
+      {% include "sidepage/navbar.html" %}
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+         {% include "sidepage/header.html" %}
+         <!-- Main content -->
+         <div class="content">
+            <div class="container">
+               <div class="row">
+
+                  {% for link, name in kehadiran %}
+                  <div class="col-lg-6">
+                     <div class="card">
+                        <div class="card-header">
+                           <h5 class="card-title m-0">Login {{name}}</h5>
+                        </div>
+                        <div class="card-body">
+                           <a href="{{link}}" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+               <!-- /.row -->
+            </div><!-- /.container-fluid -->
+         </div>
+         <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+   </div>
+   {% include "sidepage/scripts.html" %}
+</body>
+
+{% endblock isi %}
+
+</html>

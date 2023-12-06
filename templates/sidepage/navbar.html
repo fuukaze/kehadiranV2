@@ -1,0 +1,13 @@
+<!-- Navbar -->
+<nav class="main-header navbar navbar-light navbar-white">
+   <div class="container">
+      {% for link, name in nav %}
+      <a href="{{link}}" class="navbar-brand" style="margin:auto">
+         <span class="brand-text font-weight-light">
+            {{name}}
+         </span>
+      </a>
+      {% endfor %}
+   </div>
+</nav>
+<!-- /.navbar -->

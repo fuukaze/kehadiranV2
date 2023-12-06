@@ -1,0 +1,26 @@
+~ cara update tabel di database {
+
+1. hapus tabel yang diinginkan
+2. python manage.py migrate --fake (nama app) zero
+3. [ hapus file inital.py dan (inital.cpython-39.pyc pada __pycache__) ]
+4. python manage.py makemigrations
+5. python manage.py migrate
+
+}
+
+~ cara tambah data di database {
+
+1. python manage.py makemigrations
+2. python manage.py migrate
+
+}
+
+~ cara reset database {
+
+1. hapus file database sqlite3
+2. delete semuanya kecuali file __init__.py di file migrations pada semua django app
+3. berikan update data pada models yang diinginkan
+4. python manage.py makemigrations
+5. python manage.py migrate
+
+}

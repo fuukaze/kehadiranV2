@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{title}}
+{% endblock title %}
+
+{% block css %}
+{% include "form/pengurus/css.html" %}
+{% endblock css %}
+
+{% block isi %}
+
+<body class="hold-transition login-page">
+   <div class="login-box">
+      <div class="login-logo">
+         <a href=""><b>Selamat Datang</b></a>
+      </div>
+      <!-- /.login-logo -->
+      <div class="card">
+         <div class="card-body login-card-body">
+            {% include "form/pengurus/index.html" %}
+         </div>
+         <!-- /.login-card-body -->
+      </div>
+   </div>
+   <!-- /.login-box -->
+   {% include "form/pengurus/script.html" %}
+</body>
+{% endblock isi %}
