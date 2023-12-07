@@ -16,9 +16,9 @@ class Pengurus(models.Model):
 # models kehadiran mahasiswa mahasiswa
 class Kehadiran(models.Model):
    mahasiswa = models.ForeignKey(Mahasiswa, on_delete=models.CASCADE, blank=True, null=True)
-   nim = models.CharField(max_length=100)
-   nama = models.CharField(max_length=100)
-   jurusan = models.CharField(max_length=50)
+   nim = models.CharField(max_length=100, null=True)
+   nama = models.CharField(max_length=100, null=True)
+   jurusan = models.CharField(max_length=50, null=True)
    foto_hadir = models.ImageField(upload_to="KehadiranMahasiswa")
    jam_hadir = models.DateTimeField(auto_now_add=True)
 

@@ -51,16 +51,18 @@ if (navigator.mediaDevices.getUserMedia) {
                     image.append(img)
 
                     video.classList.add('not-visible')
+                    image.classList.add('taken-picture')
 
                     const reader = new FileReader()
 
                     reader.readAsDataURL(blob)
                     reader.onloadend = () => {
                         const base64data = reader.result
+                        console.log(base64data)
 
                         const fd = new FormData()
                         fd.append('csrfmiddlewaretoken', csrftoken)
-                        fd.append('foto_kehadiran', base64data)
+                        fd.append('foto_hadir', base64data)
 
                         $.ajax({
                             type: 'POST',

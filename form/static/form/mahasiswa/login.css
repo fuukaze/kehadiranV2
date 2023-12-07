@@ -2,7 +2,7 @@
    display: none;
 }
 
-image {
-   width: 320px;
-   height: 240px;
+.card img {
+   width: 100%;
+   height: 100%;
 }
