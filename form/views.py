@@ -60,41 +60,84 @@ def admin_logout(request):
 #     app2_url = '/mahasiswa/'  # Adjust the URL as needed
 #     return redirect(app2_url)
 
-def find_user_view(request):
-    # function untuk mencari mahasiswa apakah hadir atau tidak
-    if is_ajax(request):
-        # jika menerima paket dari kode program ajax akan menjalankan kode program
+# def find_user_view(request):
+#     # function untuk mencari mahasiswa apakah hadir atau tidak
+#     if is_ajax(request):
+#         # jika menerima paket dari kode program ajax akan menjalankan kode program
 
-        # terima data yang dikirim ajax
-        photo = request.POST.get('foto_hadir') #ambil nilai request foto_hadir dari tipe POST
-        _, str_img = photo.split(';base64') #pecah file sebelum ;base64 supaya str_img berisi kode gambar dalam format base64
+#         # terima data yang dikirim ajax
+#         photo = request.POST.get('foto_hadir') #ambil nilai request foto_hadir dari tipe POST
+#         latitude = float(request.POST.get('latitude'))
+#         longitude = float(request.POST.get('longitude'))
+#         _, str_img = photo.split(';base64') #pecah file sebelum ;base64 supaya str_img berisi kode gambar dalam format base64
 
-        # print(photo)
-        decoded_file = base64.b64decode(str_img)
-        # print(decoded_file)
+#         # print(photo)
+#         decoded_file = base64.b64decode(str_img)
+#         # print(decoded_file)
 
-        x = Kehadiran()
-        x.foto_hadir.save('upload.jpg', ContentFile(decoded_file))
-        x.save()
+#         x = Kehadiran()
+#         x.foto_hadir.save('upload.jpg', ContentFile(decoded_file))
+#         x.lokasi = f"{latitude},{longitude}"
+#         x.save()
 
-        res = classify_face(x.foto_hadir.path)
-        if res:
-            user_exists = Mahasiswa.objects.filter(nim=res).exists()
-            if user_exists:
-                mhs = Mahasiswa.objects.get(nim=res)
-                x.nama = mhs.nama
-                x.nim = mhs.nim
-                x.jurusan = mhs.jurusan
-                x.mahasiswa = mhs
-                x.save()
+#         res = classify_face(x.foto_hadir.path)
+#         if res:
+#             user_exists = Mahasiswa.objects.filter(nim=res).exists()
+#             if user_exists:
+#                 mhs = Mahasiswa.objects.get(nim=res)
+#                 x.nama = mhs.nama
+#                 x.nim = mhs.nim
+#                 x.jurusan = mhs.jurusan
+#                 x.mahasiswa = mhs
+#                 x.save()
 
-                login(request, None)
+#                 login(request, None)
 
-                # return JsonResponse({'success': True})
-        else:
-            return redirect('mahasiswa/')
-        # return JsonResponse({'success': False})
-        return redirect('/mahasiswa/')
-    else:
-        return redirect('mahasiswa/')
+#                 return JsonResponse({'success': True, 'redirect_url': '/mahasiswa/'})
+            
+#         # return redirect('mahasiswa/')
+#         return JsonResponse({'success': False})
+#     return redirect('mahasiswa/')
         
+def find_user_view(request):
+    # Function to check if the request is an AJAX request
+    if is_ajax(request) and request.method == 'POST':
+        try:
+            # Terima data yang dikirim ajax
+            photo = request.POST.get('foto_hadir')
+            latitude = float(request.POST.get('latitude'))
+            longitude = float(request.POST.get('longitude'))
+            _, str_img = photo.split(';base64')
+
+            decoded_file = base64.b64decode(str_img)
+
+            x = Kehadiran()
+            x.foto_hadir.save('upload.jpg', ContentFile(decoded_file))
+            x.lokasi = f"{latitude},{longitude}"
+            x.save()
+
+            res = classify_face(x.foto_hadir.path)
+            if res:
+                user_exists = Mahasiswa.objects.filter(nim=res).exists()
+                if user_exists:
+                    mhs = Mahasiswa.objects.get(nim=res)
+                    x.nama = mhs.nama
+                    x.nim = mhs.nim
+                    x.jurusan = mhs.jurusan
+                    x.mahasiswa = mhs
+                    x.save()
+
+                    login(request, None)
+
+                    return JsonResponse({'success': True, 'redirect_url': '/mahasiswa/'})
+        except ValueError:
+            # Handle the case where latitude or longitude cannot be converted to float
+            return JsonResponse({'success': False, 'error': 'Invalid latitude or longitude'})
+        except Exception as e:
+            # Handle other exceptions
+            return JsonResponse({'success': False, 'error': str(e)})
+        
+        return JsonResponse({'success': False, 'error': 'Classification failed'})
+    else:
+        # If the request is not an AJAX POST request, redirect to 'mahasiswa/' URL
+        return redirect('mahasiswa/')

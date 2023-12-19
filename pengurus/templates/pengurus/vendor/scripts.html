@@ -1,0 +1,51 @@
+{% load static %}
+<!-- jQuery -->
+<script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static "vendor/bootstrap/bootstrap.bundle.min.js" %}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{% static "vendor/datatables/jquery.dataTables.min.js" %}"></script>
+<script src="{% static "vendor/datatables-bs4/js/dataTables.bootstrap4.min.js" %}"></script>
+<script src="{% static "vendor/datatables-responsive/js/dataTables.responsive.min.js" %}"></script>
+<script src="{% static "vendor/datatables-responsive/js/responsive.bootstrap4.min.js" %}"></script>
+<script src="{% static "vendor/datatables-buttons/js/dataTables.buttons.min.js" %}"></script>
+<script src="{% static "vendor/datatables-buttons/js/buttons.bootstrap4.min.js" %}"></script>
+<script src="{% static "vendor/jszip/jszip.min.js" %}"></script>
+<script src="{% static "vendor/pdfmake/pdfmake.min.js" %}"></script>
+<script src="{% static "vendor/pdfmake/vfs_fonts.js" %}"></script>
+<script src="{% static "vendor/datatables-buttons/js/buttons.html5.min.js" %}"></script>
+<script src="{% static "vendor/datatables-buttons/js/buttons.print.min.js" %}"></script>
+<script src="{% static "vendor/datatables-buttons/js/buttons.colVis.min.js" %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static "vendor/adminlte/adminlte.min.js" %}"></script>
+<script>
+   $(function () {
+      $("#example1").DataTable({
+         "responsive": true,
+         "lengthChange": false,
+         "autoWidth": false,
+         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis", {
+            text: 'Tambah', // Button label
+            action: function (e, dt, node, config) {
+               // Show modal when the add button is clicked
+               $('#tambahModal').modal('show');
+            }
+         }]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+         "paging": true,
+         "lengthChange": false,
+         "searching": false,
+         "ordering": true,
+         "info": true,
+         "autoWidth": false,
+         "responsive": true,
+      });
+      $("#example3").DataTable({
+         "responsive": true,
+         "lengthChange": false,
+         "autoWidth": false,
+         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
+   });
+</script>

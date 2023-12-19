@@ -1,18 +1,35 @@
 from django.shortcuts import render
+from .models import Kehadiran
+from mahasiswa.models import Mahasiswa
 
 def index(request):
     context = {
-        'title': 'Login',
+        'title': 'Admin | Beranda',
+        'type' : 'Beranda',
         'heading': 'Blog',
         'subheadin': 'silahkan masukkan username dan password anda',
-        'pages': [
-            ['sidepage/mahasiswa', 'Absen Mahasiswa',
-                'btn btn-danger btn-block'],
-            ['sidepage/dosen', 'Absen Dosen', 'btn btn-warning btn-block'],
-        ],
+        'nav': ['Pengurus','Beranda'],
     }
-    return render(request, "pengurus/index.html", context)
+    return render(request, "pengurus/pages/beranda.html", context)
 
-def login(request):
+def dataMahasiswa(request):
+    mhs = Mahasiswa.objects.all()
+    context = {
+        'title': 'Admin | Mahasiswa',
+        'heading': 'Blog',
+        'subheadin': 'silahkan masukkan username dan password anda',
+        'nav': ['Pengurus','Mahasiswa'],
+        'tabel_mhs': mhs,
+    }
+    return render(request, "pengurus/pages/data-mahasiswa.html", context)
 
-    return render(request, "pengurus/login.html")
+def dataKehadiran(request):
+    hadir = Kehadiran.objects.all()
+    context = {
+        'title': 'Admin | Kehadiran',
+        'heading': 'Blog',
+        'subheadin': 'silahkan masukkan username dan password anda',
+        'nav': ['Pengurus','Kehadiran'],
+        'tabel_kehadiran': hadir,
+    }
+    return render(request, "pengurus/pages/data-kehadiran.html", context)

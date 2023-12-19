@@ -20,6 +20,7 @@ class Kehadiran(models.Model):
    nama = models.CharField(max_length=100, null=True)
    jurusan = models.CharField(max_length=50, null=True)
    foto_hadir = models.ImageField(upload_to="KehadiranMahasiswa")
+   lokasi = models.CharField(max_length=255, blank=True, null=True) 
    jam_hadir = models.DateTimeField(auto_now_add=True)
 
    def __str__(self):

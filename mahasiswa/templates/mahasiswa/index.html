@@ -1,14 +1,29 @@
+<!-- mahasiswa_template.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>Mahasiswa Page</title>
 </head>
 
 <body>
-   Sukses
+   <h1>Mahasiswa Data</h1>
+
+   {% if latest_data %}
+   <ul>
+      {% for data in latest_data %}
+      <li>
+         Nama: {{ data.nama }}<br>
+         NIM: {{ data.nim }}<br>
+         Jurusan: {{ data.jurusan }}<br>
+         Lokasi: {{ data.lokasi }}<br>
+         Foto Hadir: <img src="{{ data.foto_hadir.url }}" alt="Foto Hadir">
+      </li>
+      {% endfor %}
+   </ul>
+   {% else %}
+   <p>No data available.</p>
+   {% endif %}
 </body>
 
 </html>

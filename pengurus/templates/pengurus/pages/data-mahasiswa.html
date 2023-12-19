@@ -1,0 +1,92 @@
+{% extends "pengurus/index.html" %}
+
+{% block isi %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+   <!-- Content Header (Page header) -->
+   <section class="content-header">
+      <div class="container-fluid">
+         <div class="row mb-2">
+            <div class="col-sm-6">
+               <h1>Data Mahasiswa</h1>
+            </div>
+            <div class="col-sm-6">
+               <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="">{{nav.0}}</a></li>
+                  <li class="breadcrumb-item active">{{nav.1}}</li>
+               </ol>
+            </div>
+         </div>
+      </div><!-- /.container-fluid -->
+   </section>
+
+   <!-- Main content -->
+   <section class="content">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-12">
+               <div class="card">
+                  <div class="card-header">
+                     <h3 class="card-title">Tabel database data mahasiswa</h3>
+                  </div>
+                  <!-- /.card-header -->
+
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                     <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                           <tr>
+                              <th>Nama</th>
+                              <th>NIM</th>
+                              <th>Alamat</th>
+                              <th>Foto</th>
+                              <th>Jenis Kelamin</th>
+                              <th>Jurusan</th>
+                              <th>Email</th>
+                              <th>Aksi</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {% for n in tabel_mhs %}
+                           <tr>
+                              <td>{{n.nama}}</td>
+                              <td>{{n.nim}}</td>
+                              <td>{{n.alamat}}</td>
+                              {% comment %} <td>{{n.foto_mhs}}</td> {% endcomment %}
+                              <td><img src="/media/{{n.foto_mhs}}" alt="foto {{n.nama}}" srcset=""></td>
+                              <td>{{n.jenis_kelamin}}</td>
+                              <td>{{n.jurusan}}</td>
+                              <td>{{n.email}}</td>
+                              <td>
+                                 <a href="" class="btn btn-warning">Edit</a>
+                                 <a href="" class="btn btn-danger">Hapus</a>
+                              </td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                        <tfoot>
+                           <tr>
+                              <th>Nama</th>
+                              <th>NIM</th>
+                              <th>Alamat</th>
+                              <th>Foto</th>
+                              <th>Jenis Kelamin</th>
+                              <th>Jurusan</th>
+                              <th>Email</th>
+                              <th>Aksi</th>
+                           </tr>
+                        </tfoot>
+                     </table>
+                  </div>
+                  <!-- /.card-body -->
+               </div>
+               <!-- /.card -->
+            </div>
+            <!-- /.card -->
+         </div>
+         <!-- /.col -->
+      </div>
+      <!-- /.row -->
+</div>
+{% endblock isi %}

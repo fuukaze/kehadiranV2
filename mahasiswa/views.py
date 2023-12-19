@@ -1,17 +1,11 @@
 from django.shortcuts import render
+from pengurus.models import Kehadiran
 
 # Create your views here.
 def index(request):
-   #  context = {
-   #      'title': 'HomePage',
-   #      'heading': 'Main Page',
-   #      'subheading': 'jurnal kelas terbuka',
-   #      'nav': [
-   #          ['/', 'HOMEPAGE'],
-   #      ],
-   #      'kehadiran': [
-   #          ['form/mahasiswa/', 'Mahasiswa'],
-   #          ['form/', 'Admin']
-   #      ],
-   #  }
-    return render(request, 'mahasiswa/index.html')
+    # Fetch the latest data from the Kehadiran model
+    latest_data = Kehadiran.objects.order_by('-id')[:1]
+
+    context = {'latest_data': latest_data}
+    
+    return render(request, 'mahasiswa/index.html', context)

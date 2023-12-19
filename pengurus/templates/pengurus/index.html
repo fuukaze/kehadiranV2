@@ -1,14 +1,59 @@
+{% comment %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>{{title}}</title>
+   {% include "pengurus/vendor/styles.html" %}
 </head>
 
-<body>
+<body class="hold-transition layout-top-nav">
+   <div class="wrapper">
 
+      {% include "pengurus/vendor/navbar.html" %}
+
+      {% include "pengurus/vendor/sidebar.html" %}
+
+      {% block isi %}
+
+      {% endblock isi %}
+      <!-- ./wrapper -->
+   </div>
+   {% include "pengurus/vendor/scripts.html" %}
+</body>
+
+</html> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>AdminLTE 3 | DataTables</title>
+
+   {% include "pengurus/vendor/styles.html" %}
+</head>
+
+<body class="hold-transition sidebar-mini">
+   <div class="wrapper">
+      <!-- Navbar -->
+      {% include "pengurus/vendor/navbar.html" %}
+      <!-- /.navbar -->
+
+      <!-- Main Sidebar Container -->
+      {% include "pengurus/vendor/sidebar.html" %}
+
+      <!-- Content Wrapper. Contains page content -->
+      {% block isi %}{% endblock isi %}
+      <!-- /.content-wrapper -->
+
+      {% include "pengurus/vendor/modals.html" %}
+   </div>
+   <!-- ./wrapper -->
+
+   {% include "pengurus/vendor/scripts.html" %}
 </body>
 
 </html>
